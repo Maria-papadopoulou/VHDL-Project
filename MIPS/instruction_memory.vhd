@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+USE ieee.numeric_std.ALL;
+
+entity instruction_memory is
+port ( 
+        Address: in std_logic_vector(31 downto 0);
+       ReadData: out std_logic_vector(31 downto 0));  
+end instruction_memory;
+architecture dataflow of instruction_memory is
+  type regArray is array(0 to 15) of std_logic_vector(31 downto 0);
+signal regfile : regArray:= (
+    "00100000000000000000000000000000",
+    "00100000010000100000000000000000", 
+    "00100000100000100000000000000000",
+    "00100000000000110000000000000001", 
+    "00100000000001010000000000000011", 
+    "00000000011000000011000000100000",
+    "10101100100001100000000000000000", 
+    "00100000011000110000000000000001",
+    "00100000100001000000000000000001", 
+    "00100000101001011111111111111111", 
+    "00010100000001011111111111111010", 
+    "00000000000000000000000000000000",
+    "00000000000000000000000000000000",
+    "00000000000000000000000000000000",
+    "00000000000000000000000000000000",
+    "00000000000000000000000000000000"
+  );
+  begin 
+    ReadData<= regfile(to_integer(unsigned(Address)));
+  end dataflow;
+  
